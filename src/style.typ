@@ -26,6 +26,10 @@
   等宽: ("Consolas", "SimHei"),
 )
 
+#let 颜色 = (
+  深红: rgb(192, 0, 0),
+)
+
 
 #let heading_size = (字号.小二, 字号.三号, 字号.四号, 字号.小四)
 
@@ -54,6 +58,7 @@
   )
   #set par(spacing: 1.5em, leading: 1em)
   #set heading(outlined: false)
+  #show cite: set text(fill: 颜色.深红)
 
   #show heading: it => custom_heading(level: {
     if it.numbering == none {

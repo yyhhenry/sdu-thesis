@@ -1,8 +1,9 @@
 // From https://typst.app/project/pHQ9xvylzKkoh1LNdVyjXl
 // See also https://github.com/nju-lug/modern-nju-thesis/issues/3
+// Original author: csimide, OrangeX4
 
-// Author: csimide, OrangeX4
-// Tested only on GB-7714-2015-Numeric
+#import "style.typ": 颜色
+
 #let bilingual-bibliography(
   bibliography: none,
   style: "gb-7714-2015-numeric",
@@ -36,6 +37,11 @@
     } else if content == [ ] {
       " "
     }
+  }
+
+  show grid.cell.where(x: 0): it => {
+    set text(fill: 颜色.深红)
+    it
   }
 
   show grid.cell.where(x: 1): it => {
