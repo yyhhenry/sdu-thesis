@@ -20,7 +20,7 @@
 
 #let 字体 = (
   宋体: ("Times New Roman", "SimSun"),
-  黑体: ("Arial", "SimHei"),
+  黑体: ("Times New Roman", "SimHei"),
   楷体: ("Times New Roman", "STKaiti"),
   仿宋: ("Times New Roman", "STFangSong"),
   等宽: ("Consolas", "SimHei"),
@@ -53,9 +53,15 @@
     region: "cn",
   )
   #set par(spacing: 1.5em, leading: 1em)
+  #set heading(outlined: false)
 
-  #set heading(numbering: "1.1 ")
-  #show heading: it => custom_heading(level: it.level)[#it]
+  #show heading: it => custom_heading(level: {
+    if it.numbering == none {
+      0
+    } else {
+      it.level
+    }
+  })[#it]
 
   #body
 ]
@@ -77,6 +83,7 @@
       ]
     ],
   )
+  #set heading(numbering: "1.1 ", outlined: true)
   #counter(page).update(1)
   #counter(footnote).update(0)
 
