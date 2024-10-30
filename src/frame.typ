@@ -125,7 +125,7 @@
     columns: (2em, 1.5em, 1fr, 1.5cm, 3.6cm, 4cm, 1.74cm),
     rows: (0.75cm, 0.99cm, 7.57cm, 0.78cm, 7.36cm, 0.77cm),
 
-    table.cell(colspan: 2)[ 姓名 ], table.cell()[#姓名],
+    table.cell(colspan: 2)[姓名], table.cell()[#姓名],
     [学号],[#学号],[论文(设计)总成绩],[],
 
     table.cell(colspan: 3, inset: 8pt)[论文(设计)题目],
