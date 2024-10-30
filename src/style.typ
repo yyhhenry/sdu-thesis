@@ -33,9 +33,9 @@
 
 #let heading_size = (字号.小二, 字号.三号, 字号.四号, 字号.小四)
 
-#let custom_heading(body, level: 0) = [
+#let custom-heading(body, level: 0, force-center: false) = [
   #set text(font: 字体.黑体, weight: "bold", size: heading_size.at(level))
-  #if level <= 1 [
+  #if level <= 1 or force-center [
     #align(center)[
       #body
     ]
@@ -45,7 +45,7 @@
   #v(0.5em)
 ]
 
-#let basic_rules(body) = [
+#let basic-rules(body) = [
   #set page(
     paper: "a4",
     margin: (x: 3cm, y: 2.5cm),
@@ -56,21 +56,71 @@
     lang: "zh",
     region: "cn",
   )
-  #set par(spacing: 1.5em, leading: 1em)
-  #set heading(outlined: false)
-  #show cite: set text(fill: 颜色.深红)
+  #let fakepar = context {
+    let b = par[#box()]
+    let t = measure(b + b)
 
-  #show heading: it => custom_heading(level: {
-    if it.numbering == none {
-      0
-    } else {
-      it.level
-    }
-  })[#it]
+    b
+    v(-t.height)
+  }
+  #set par(spacing: 1.5em, leading: 1em, first-line-indent: 2em)
+  #set heading(outlined: false)
+
+  // 深红色突出显示
+  #show cite: set text(fill: 颜色.深红)
+  #show ref: set text(fill: 颜色.深红)
+  #show ref: it => [
+    #show regex("[\d-]+"): it => text(weight: "bold")[#it]
+    #it
+  ]
+  #set math.equation(numbering: (..nums) => (text(fill: 颜色.深红)[(#counter(heading).get().at(0)-#nums.at(0))]))
+  #set figure(numbering: (..nums) => (text(fill: 颜色.深红)[#counter(heading).get().at(0)-#nums.at(0)]))
+  #show figure.caption: it => (
+    text(size: 字号.五号, weight: "bold")[
+      #text(fill: 颜色.深红)[#it.supplement]
+      #context it.counter.display(it.numbering)
+      #it.body
+    ]
+  )
+  #show figure.where(kind: image): it => [
+    #it.body
+    #v(-0.5em)
+    #it.caption
+    #fakepar
+  ]
+  #show figure.where(kind: table): it => [
+    #it.caption
+    #v(-0.5em)
+    #it.body
+    #fakepar
+  ]
+  #show math.equation: it => [
+    #it
+    #fakepar
+  ]
+
+  #show heading: it => custom-heading(
+    level: {
+      if it.numbering == none {
+        it.level - 1
+      } else {
+        it.level
+      }
+    },
+    force-center: it.numbering == none,
+  )[
+    #it
+    #fakepar
+    #if it.level == 1 [
+      #counter(figure.where(kind: image)).update(0)
+      #counter(figure.where(kind: table)).update(0)
+      #counter(math.equation).update(0)
+    ]
+  ]
 
   #body
 ]
-#let custom_page(body) = [
+#let custom-page(body) = [
   #set page(
     footer: context [
       #set text(fill: gray, font: 字体.宋体, size: 字号.小五)
@@ -91,6 +141,16 @@
   #set heading(numbering: "1.1 ", outlined: true)
   #counter(page).update(1)
   #counter(footnote).update(0)
+
+  #body
+]
+#let appendix-like-page(body) = [
+  // 参考文献，致谢，附录等部分不需要编号
+  #set heading(numbering: none)
+
+  #set figure(numbering: (..nums) => (text(fill: 颜色.深红)[#nums.at(0)]))
+  #show figure.where(kind: image): set figure(supplement: "附图")
+  #show figure.where(kind: table): set figure(supplement: "附表")
 
   #body
 ]
