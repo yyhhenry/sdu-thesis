@@ -1,8 +1,8 @@
-#import "style.typ": 字号, 字体
+#import "style.typ": 字号, 字体, ind
 
 #let cover(
   题目: "请输入论文题目",
-  姓名: "请输入姓名",
+  姓名: "请输入",
   学号: "20XX00X00XXX",
   学院: "机电与信息工程学院",
   专业: "请输入专业",
@@ -42,11 +42,9 @@
 
     #linebreak()
 
-    #par[
-      #align(center)[
-        #text(font: 字体.黑体, size: 字号.小二)[
-          #题目
-        ]
+    #align(center)[
+      #text(font: 字体.黑体, size: 字号.小二)[
+        #题目
       ]
     ]
 
@@ -95,6 +93,84 @@
     #text(size: 字号.三号, font: 字体.楷体, weight: "bold")[
       #日期
     ]
+  ]
+
+  #pagebreak()
+
+
+  #set page(
+    paper: "a4",
+    margin: (x: 3cm, y: 2.5cm),
+  )
+  #align(center)[
+    #text(font: 字体.黑体.at(1), size: 字号.二号)[
+      毕业论文(设计)成绩评定表
+    ]
+  ]
+  #set text(size: 字号.小四)
+
+
+  #text(size: 字号.五号)[
+    #grid(
+      columns: (auto, 1fr, auto),
+      align: (left, center, right),
+      inset: 0pt,
+      [学院：#学院], [专业：#专业], [年级：#年级],
+    )
+  ]
+
+  #v(-1em) // 取消表格上方的间距
+
+  #table(
+    stroke: 0.5pt,
+    align: bottom + left,
+    columns: (2em, 1.5em, 1fr, 1.5cm, 3.6cm, 4cm, 1.74cm),
+    rows: (0.75cm, 0.99cm, 7.57cm, 0.78cm, 7.36cm, 0.77cm),
+
+    table.cell(colspan: 2)[ 姓名 ], table.cell()[#姓名],
+    [学号],[#学号],[论文(设计)总成绩],[],
+
+    table.cell(colspan: 3, inset: 8pt)[论文(设计)题目],
+    table.cell(colspan: 4, inset: 8pt)[#题目],
+
+    table.cell(rowspan: 2, align: center + horizon)[
+      指
+      导
+      教
+      师
+      评
+      语
+    ],
+    table.cell(colspan: 6)[],
+    table.cell(colspan: 6)[
+      #grid(
+        columns: (auto, 1fr, auto),
+        align: (left, right, right),
+        [评定成绩：#h(5em)], [签名：#h(6em)], [#h(2.5em)年#h(1.5em)月#h(1.5em)日],
+      )
+    ],
+
+    table.cell(rowspan: 2, align: center + horizon)[
+      答
+      辩
+      小
+      组
+      评
+      语
+    ],
+    table.cell(colspan: 6)[],
+    table.cell(colspan: 6)[
+      #grid(
+        columns: (auto, 1fr, auto),
+        align: (left, right, right),
+        [答辩成绩：#h(5em)], [组长签名：#h(6em)], [#h(2.5em)年#h(1.5em)月#h(1.5em)日],
+      )
+    ],
+
+  )
+
+  #text(size: 字号.五号)[
+    #ind 注：指导教师、答辩小组给予的成绩和论文(设计)总成绩统一实行百分制，总成绩中指导教师评分占40%(抽样答辩未被抽中的学生占100%)，答辩小组评分占60%。评语、成绩、签名及日期处必须手写。
   ]
 
   #pagebreak()

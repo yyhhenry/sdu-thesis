@@ -1,6 +1,6 @@
 #import "@preview/cuti:0.2.1": show-cn-fakebold
 #show: show-cn-fakebold
-#import "src/style.typ": 字号, 字体, basic_rules, ind, custom_heading, custom_page
+#import "src/style.typ": 字号, 字体, 颜色, basic_rules, ind, custom_heading, custom_page
 #import "src/frame.typ": cover
 #import "src/bilingual-bibliography.typ": bilingual-bibliography
 
@@ -17,12 +17,6 @@
   // 指导教师: [],
   // 日期: [],
 )
-
-= 毕业论文(设计)成绩评定表
-
-TODO（较为复杂的表格，建议直接在Word中编辑）
-
-#pagebreak()
 
 = 摘#{ind}要
 
@@ -87,25 +81,37 @@ TODO（较为复杂的表格，建议直接在Word中编辑）
 
 = 本科毕业论文写作规范
 
+TODO
+
 #pagebreak()
 
 
 = 学位论文形式规范检查30条
 
+TODO
 
 #pagebreak()
 
+= 总结与展望
+
+TODO
+
+#pagebreak()
+
+// 参考文献，致谢，附录等部分不需要编号
 #set heading(numbering: none)
 
-#let std_bib = bibliography("ref.bib", title: [参考文献], style: "gb-7714-2015-numeric")
-// 启用双语支持
+= 参考文献
+
+// 双语参考文献
+#let std_bib = bibliography("ref.bib", title: none, style: "gb-7714-2015-numeric")
 #bilingual-bibliography(bibliography: std_bib)
 
 #pagebreak()
 
 = 致#{ind}谢
 
-#ind 对指导教师和协助完成论文(设计)的组织和个人表示谢意。致谢应实事求是，切忌浮夸之词。(限一页，自己写，以下示例仅供参考)
+#ind 对指导教师和协助完成论文(设计)的组织和个人表示谢意。致谢应实事求是，切忌浮夸之词。#text(fill: 颜色.深红)[(限一页，自己写，以下示例仅供参考)]
 
 #ind 本论文的研究工作是在我的指导老师XXX老师的悉心指导和严格要求下完成的，XXX老师认真指导我完成了论文选题、查阅文献、课题进展以及整个论文的撰写工作。XXX老师认真严谨的治学态度、实事求是的工作作风和科学高效的工作方法对我产生了极大的影响，这些也都是我今后工作和学习的榜样。
 
