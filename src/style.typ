@@ -169,6 +169,8 @@
 #let appendix-like-page(body) = [
   // 参考文献，致谢，附录等部分不需要编号
   #set heading(numbering: none)
+  #show heading.where(level: 2): set heading(outlined: false)
+  #show heading.where(level: 3): set heading(outlined: false)
   #set math.equation(numbering: none)
 
   #set figure(numbering: (..nums) => (text(fill: 颜色.深红)[#nums.at(0)]))
