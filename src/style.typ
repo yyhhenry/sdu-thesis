@@ -82,6 +82,12 @@
       #it.body
     ]
   )
+  #show footnote: it => [
+    #text(fill: 颜色.深红)[#it]
+  ]
+  #set footnote(numbering: (..nums) => (text(fill: 颜色.深红)[#nums.at(0)]))
+
+  // 自动缩进
   #show figure.where(kind: image): it => [
     #it.body
     #v(-0.5em)
