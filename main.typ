@@ -42,7 +42,7 @@
 
 = 绪#{ind}论
 
-本模板的源码见 #link("https://github.com/yyhhenry/sdu-thesis")[`sdu-thesis`] ，在线预览见 #link("https://typst.app/project/p99-MpfnTeba5NWHYl-sxo")[Typst App] ，受实际条件限制，在线预览版本可能落后于源码版本。
+本模板的源码见 #link("https://github.com/yyhhenry/sdu-thesis")[`sdu-thesis`] ，在线预览见 #link("https://typst.app/project/rInt1n5uvGCyzbfMvVUaPd")[Typst App] ，受实际条件限制，在线预览版本可能落后于源码版本。
 
 
 == 选题背景与研究意义

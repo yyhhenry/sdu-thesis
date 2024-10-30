@@ -1,5 +1,7 @@
 # SDU Thesis Template (Alpha)
 
+[Quick Start on Typst App](https://typst.app/project/rInt1n5uvGCyzbfMvVUaPd)
+
 ## Tips
 
 Set `"tinymist.fontPaths": ["./fonts/"]` in your settings.json to use the custom fonts.
