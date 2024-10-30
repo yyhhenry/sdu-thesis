@@ -94,7 +94,19 @@
     #it.body
     #fakepar
   ]
-  #show math.equation: it => [
+  #show math.equation.where(block: true): it => [
+    #it
+    #fakepar
+  ]
+  #show list: it => [
+    #it
+    #fakepar
+  ]
+  #show enum: it => [
+    #it
+    #fakepar
+  ]
+  #show terms: it => [
     #it
     #fakepar
   ]
@@ -147,6 +159,7 @@
 #let appendix-like-page(body) = [
   // 参考文献，致谢，附录等部分不需要编号
   #set heading(numbering: none)
+  #set math.equation(numbering: none)
 
   #set figure(numbering: (..nums) => (text(fill: 颜色.深红)[#nums.at(0)]))
   #show figure.where(kind: image): set figure(supplement: "附图")
