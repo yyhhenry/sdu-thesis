@@ -157,7 +157,7 @@
           山东大学本科毕业论文(设计)
         ]
         #v(-1em)
-        #line(length: 100%, stroke: (paint: gray))
+        #line(length: 100%, stroke: (paint: gray, thickness: 0.5pt))
       ]
     ],
   )

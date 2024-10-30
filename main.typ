@@ -154,14 +154,14 @@ $ "SNR (dB)" = 10 dot log_10 (S / N) $ <eq-1-SNR>
     stroke: none,
     columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
     align: center + horizon,
-    table.hline(),
+    table.hline(stroke: 1.5pt),
     table.header[粘度 $("mPa" "s")$][喷嘴半径 $("mm")$][电压峰值 $(V)$][分配周期 $("ms")$][气压 $("MPa")$][操作体积 $(mu L)$],
-    table.hline(stroke: 0.5pt),
+    table.hline(stroke: 0.75pt),
     [\<1500], [0.1-0.3], [$>=75$], [$>=4$], [0.07-0.2], [$>=0.06$],
     [\<4500], [0.2-0.3], [$>=75$], [$>=10$], [0.15-0.3], [$>=0.2$],
     [\<8000], [0.3-0.5], [$>=90$], [$>=25$], [0.2-0.4], [$>=0.4$],
     [\<15000], [0.3-0.7], [$>=100$], [$>=40$], [0.25-0.5], [$>=0.5$],
-    table.hline(),
+    table.hline(stroke: 1.5pt),
   )
 ] <tab-2-粘度梯度>
 
@@ -271,11 +271,11 @@ TODO
     columns: (1fr, 1fr, 1fr),
     align: center,
     stroke: none,
-    table.hline(),
+    table.hline(stroke: 1.5pt),
     table.header[量的名称][单位名称][单位符号],
-    table.hline(stroke: 0.5pt),
+    table.hline(stroke: 0.75pt),
     [平面角], [弧度], [rad],
     [立体角], [球面度], [sr],
-    table.hline(),
+    table.hline(stroke: 1.5pt),
   )
 ] <tab-a-国际单位制的辅助单位>
