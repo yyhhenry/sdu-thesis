@@ -163,7 +163,7 @@
       #grid(
         columns: (auto, 1fr, auto),
         align: (left, right, right),
-        [答辩成绩：#h(5em)], [组长签名：#h(6em)], [#h(2.5em)年#h(1.5em)月#h(1.5em)日],
+        [答辩成绩：#h(5em)], [组长签名：#h(5em)], [#h(2.5em)年#h(1.5em)月#h(1.5em)日],
       )
     ],
 
