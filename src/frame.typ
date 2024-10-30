@@ -10,6 +10,10 @@
   指导教师: "请输入指导教师",
   日期: "20XX年5月XX日",
 ) = [
+  #set page(
+    paper: "a4",
+    margin: (x: 3.18cm, y: 2.54cm),
+  )
   #set text(
     font: 字体.宋体,
     size: 字号.小三,
@@ -25,7 +29,7 @@
   #align(center)[
     #scale(x: 68%, reflow: true)[
       #text(font: "FZDaHei-B02S", size: 62pt, spacing: 0.2em)[
-        毕 业 论 文（设 计）
+        毕 业 论 文#text(font: 字体.楷体)[（]设 计#text(font: 字体.楷体)[）]
       ]
     ]
   ]
@@ -35,21 +39,19 @@
   #text(weight: "bold", size: 字号.三号)[
     #v(1em)
     *论文（设计）题目：*
-  ]
 
-  #linebreak()
+    #linebreak()
 
-  #par[
-    #align(center)[
-      #text(font: 字体.黑体, size: 字号.小二)[
-        #题目
+    #par[
+      #align(center)[
+        #text(font: 字体.黑体, size: 字号.小二)[
+          #题目
+        ]
       ]
     ]
+
+    #linebreak()
   ]
-
-  #linebreak()
-  #linebreak()
-
 
   // 毕设信息
   #let field_name(..parts) = text(font: 字体.楷体, size: 字号.三号, weight: "bold", spacing: 2em)[
@@ -72,8 +74,9 @@
           1pt
         },
       ),
-      align: (right, center + bottom),
+      align: (right + bottom, center + bottom),
       columns: (auto, 5.5cm),
+      rows: 1cm,
       field_name[姓][名], field_value[#姓名],
       field_name[学][号], field_value[#学号],
       field_name[学][院], field_value[#学院],

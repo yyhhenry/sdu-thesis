@@ -21,8 +21,8 @@
 #let 字体 = (
   宋体: ("Times New Roman", "SimSun"),
   黑体: ("Times New Roman", "SimHei"),
-  楷体: ("Times New Roman", "STKaiti"),
-  仿宋: ("Times New Roman", "STFangSong"),
+  楷体: ("Times New Roman", "Kaiti"),
+  仿宋: ("Times New Roman", "FangSong"),
   等宽: ("Consolas", "SimHei"),
 )
 
