@@ -19,10 +19,10 @@
 )
 
 #let 字体 = (
+  方正大黑简体: ("Times New Roman", "FZDaHei-B02S", "SimHei"),
   宋体: ("Times New Roman", "SimSun"),
   黑体: ("Times New Roman", "SimHei"),
   楷体: ("Times New Roman", "Kaiti"),
-  仿宋: ("Times New Roman", "FangSong"),
   等宽: ("Consolas", "SimHei"),
 )
 
@@ -101,6 +101,10 @@
     #fakepar
   ]
   #show math.equation.where(block: true): it => [
+    #it
+    #fakepar
+  ]
+  #show raw.where(block: true): it => [
     #it
     #fakepar
   ]
