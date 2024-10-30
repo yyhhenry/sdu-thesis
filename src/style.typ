@@ -82,9 +82,8 @@
       #it.body
     ]
   )
-  #show footnote: it => [
-    #text(fill: 颜色.深红)[#it]
-  ]
+  #show link: set text(fill: 颜色.深红)
+  #show footnote: set text(fill: 颜色.深红)
   #set footnote(numbering: (..nums) => (text(fill: 颜色.深红)[#nums.at(0)]))
 
   // 自动缩进
@@ -105,7 +104,7 @@
     #fakepar
   ]
   #show raw.where(block: true): it => [
-    #it
+    #text(font: 字体.等宽)[#it]
     #fakepar
   ]
   #show list: it => [
