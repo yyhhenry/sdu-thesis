@@ -142,6 +142,7 @@
 
   #body
 ]
+
 #let custom-page(body) = [
   #set page(
     footer: context [

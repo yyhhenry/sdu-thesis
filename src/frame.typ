@@ -175,3 +175,17 @@
 
   #pagebreak()
 ]
+
+#let custom-outline() = [
+  #set page(numbering: "I")
+  #counter(page).update(1)
+
+  #outline(
+    title: [
+      = 目#{ind}录
+    ],
+    indent: 2em,
+  )
+
+  #pagebreak()
+]

@@ -1,7 +1,7 @@
 #import "@preview/cuti:0.2.1": show-cn-fakebold
 #show: show-cn-fakebold
-#import "src/style.typ": 字号, 字体, 颜色, basic-rules, ind, custom-heading, custom-page, appendix-like-page
-#import "src/frame.typ": cover
+#import "src/style.typ": 字号, 字体, 颜色, basic-rules, ind, custom-page, appendix-like-page
+#import "src/frame.typ": cover, custom-outline
 #import "src/bilingual-bibliography.typ": bilingual-bibliography
 
 #show: basic-rules
@@ -35,14 +35,7 @@
 *Keywords:* key word 1, key word 2, key word 3, key word 4, key word 5
 #pagebreak()
 
-#outline(
-  title: [
-    = 目#{ind}录
-  ],
-  indent: 2em,
-)
-
-#pagebreak()
+#custom-outline()
 
 
 #show: custom-page
