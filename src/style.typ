@@ -45,17 +45,7 @@
   #v(0.5em)
 ]
 
-#let basic-rules(body) = [
-  #set page(
-    paper: "a4",
-    margin: (x: 3cm, y: 2.5cm),
-  )
-  #set text(
-    font: 字体.宋体,
-    size: 字号.小四,
-    lang: "zh",
-    region: "cn",
-  )
+#let indent-rules(body) = [
   #let fakepar = context {
     let b = par[#box()]
     let t = measure(b + b)
@@ -63,30 +53,7 @@
     b
     v(-t.height)
   }
-  #set par(spacing: 1.5em, leading: 1em, first-line-indent: 2em)
-  #set heading(outlined: false)
-
-  // 深红色突出显示
-  #show cite: set text(fill: 颜色.深红)
-  #show ref: set text(fill: 颜色.深红)
-  #show ref: it => [
-    #show regex("[\d-]+"): it => text(weight: "bold")[#it]
-    #it
-  ]
-  #set math.equation(numbering: (..nums) => (text(fill: 颜色.深红)[(#counter(heading).get().at(0)-#nums.at(0))]))
-  #set figure(numbering: (..nums) => (text(fill: 颜色.深红)[#counter(heading).get().at(0)-#nums.at(0)]))
-  #show figure.caption: it => (
-    text(size: 字号.五号, weight: "bold")[
-      #text(fill: 颜色.深红)[#it.supplement]
-      #context it.counter.display(it.numbering)
-      #it.body
-    ]
-  )
-  #show link: set text(fill: 颜色.深红)
-  #show footnote: set text(fill: 颜色.深红)
-  #set footnote(numbering: (..nums) => (text(fill: 颜色.深红)[#nums.at(0)]))
-
-  // 自动缩进
+  #set par(first-line-indent: 2em)
   #show figure.where(kind: image): it => [
     #it.body
     #v(-0.5em)
@@ -119,7 +86,44 @@
     #it
     #fakepar
   ]
+  #show heading: it => [
+    #it
+    #fakepar
+  ]
 
+  #body
+]
+
+#let ref-rules(body) = [
+  #show cite: set text(fill: 颜色.深红)
+  #show ref: it => [
+    #set text(fill: 颜色.深红)
+    #show regex("[\d-]+"): it => text(weight: "bold")[#it]
+    #it
+  ]
+  #set math.equation(numbering: (..nums) => (text(fill: 颜色.深红)[(#counter(heading).get().at(0)-#nums.at(0))]))
+  #set figure(numbering: (..nums) => (text(fill: 颜色.深红)[#counter(heading).get().at(0)-#nums.at(0)]))
+  #show figure.caption: it => (
+    text(size: 字号.五号, weight: "bold")[
+      #text(fill: 颜色.深红)[#it.supplement]
+      #context it.counter.display(it.numbering)
+      #it.body
+    ]
+  )
+  #show link: set text(fill: 颜色.深红)
+  #show footnote: set text(fill: 颜色.深红)
+  #set footnote(numbering: (..nums) => (text(fill: 颜色.深红)[#nums.at(0)]))
+  #show heading.where(level: 1): it => [
+    #it
+    #counter(figure.where(kind: image)).update(0)
+    #counter(figure.where(kind: table)).update(0)
+    #counter(math.equation).update(0)
+  ]
+
+  #body
+]
+
+#let heading-rules(body) = [
   #show heading: it => custom-heading(
     level: {
       if it.numbering == none {
@@ -129,20 +133,17 @@
       }
     },
     force-center: it.numbering == none,
-  )[
-    #it
-    #fakepar
-    #if it.level == 1 [
-      #counter(figure.where(kind: image)).update(0)
-      #counter(figure.where(kind: table)).update(0)
-      #counter(math.equation).update(0)
-    ]
-  ]
+  )[#it]
 
   #body
 ]
 
-#let custom-page(body) = [
+#let foreword-rules(body) = [
+  #set heading(numbering: none, outlined: false)
+  #body
+]
+
+#let main-body-rules(body) = [
   #set page(
     footer: context [
       #set text(fill: gray, font: 字体.宋体, size: 字号.小五)
@@ -166,7 +167,7 @@
 
   #body
 ]
-#let appendix-like-page(body) = [
+#let appendix-rules(body) = [
   // 参考文献，致谢，附录等部分不需要编号
   #set heading(numbering: none)
   #show heading.where(level: 2): set heading(outlined: false)

@@ -1,11 +1,34 @@
 #import "@preview/cuti:0.2.1": show-cn-fakebold
 #show: show-cn-fakebold
-#import "src/style.typ": 字号, 字体, 颜色, basic-rules, ind, custom-page, appendix-like-page
+#import "src/style.typ": (
+  字号,
+  字体,
+  颜色,
+  ind,
+  indent-rules,
+  ref-rules,
+  heading-rules,
+  foreword-rules,
+  main-body-rules,
+  appendix-rules,
+)
 #import "src/frame.typ": cover, custom-outline
 #import "src/bilingual-bibliography.typ": bilingual-bibliography
 
-#show: basic-rules
+#set page(margin: (x: 3cm, y: 2.5cm))
+#set text(
+  font: 字体.宋体,
+  size: 字号.小四,
+  lang: "zh",
+  region: "cn",
+)
+#set par(spacing: 1.5em, leading: 1em)
 
+#show: indent-rules
+#show: ref-rules
+#show: heading-rules
+
+#show: foreword-rules
 
 #cover(
   // 题目: [],
@@ -38,7 +61,7 @@
 #custom-outline()
 
 
-#show: custom-page
+#show: main-body-rules
 
 = 绪#{ind}论
 
@@ -227,7 +250,7 @@ TODO
 #pagebreak()
 
 // 参考文献，致谢，附录等部分不需要编号
-#show: appendix-like-page
+#show: appendix-rules
 
 = 参考文献
 

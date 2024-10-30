@@ -10,16 +10,14 @@
   指导教师: "请输入指导教师",
   日期: "20XX年5月XX日",
 ) = [
-  #set page(
-    paper: "a4",
-    margin: (x: 3.18cm, y: 2.54cm),
-  )
+  #set page(margin: (x: 3.18cm, y: 2.54cm))
   #set text(
     font: 字体.宋体,
     size: 字号.小三,
     lang: "zh",
     region: "cn",
   )
+  #set par(spacing: 1.5em, leading: 1em, first-line-indent: 0em)
 
   // 封面抬头
   #align(center)[
