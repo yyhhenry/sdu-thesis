@@ -73,15 +73,19 @@
 #let indent-rules(body) = {
   set par(first-line-indent: 2em)
   show figure.where(kind: image): it => {
-    it.body
-    v(-0.5em)
-    it.caption
+    rect(stroke: none)[
+      #it.body
+      #v(-0.5em)
+      #it.caption
+    ]
     fakepar
   }
   show figure.where(kind: table): it => {
-    it.caption
-    v(-0.5em)
-    it.body
+    rect(stroke: none)[
+      #it.caption
+      #v(-0.5em)
+      #it.body
+    ]
     fakepar
   }
   show raw.where(block: true): it => {
