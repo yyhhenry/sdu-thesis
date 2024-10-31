@@ -174,7 +174,7 @@
   #pagebreak()
 ]
 
-#let custom-outline() = [
+#let thesis-outline() = [
   #set page(numbering: "I")
   #counter(page).update(1)
 

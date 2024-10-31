@@ -28,103 +28,114 @@
 
 #let 颜色 = (
   深红: rgb(192, 0, 0),
+  tips: rgb(0, 176, 80, 60%),
 )
 
+// 段首缩进（通常已经自动添加）: #ind 段落内容。
+// 短标题: 目#{ind}录
+#let ind = h(2em)
 
-#let heading_size = (字号.小二, 字号.三号, 字号.四号, 字号.小四)
+#let heading-size = (字号.小二, 字号.三号, 字号.四号, 字号.小四)
 
-#let custom-heading(body, level: 0, force-center: false) = [
-  #set text(font: 字体.黑体, weight: "bold", size: heading_size.at(level))
-  #if level <= 1 or force-center [
-    #align(center)[
-      #body
-    ]
-  ] else [
+#let custom-heading(body, level: 0, force-center: false) = {
+  set text(font: 字体.黑体, weight: "bold", size: heading-size.at(level))
+  if level <= 1 or force-center {
+    align(center)[#body]
+  } else {
+    body
+  }
+  v(0.5em)
+}
+
+#let fakepar = context {
+  let b = par[#box()]
+  let t = measure(b + b)
+
+  b
+  v(-t.height)
+}
+
+#let tips(body) = [
+  #rect(fill: 颜色.tips, stroke: none, radius: 0.5em)[
+    #fakepar
     #body
   ]
-  #v(0.5em)
 ]
+#let highlight(body) = {
+  set text(fill: 颜色.深红)
+  show regex("[\d-]+"): it => text(weight: "bold")[#it]
+  body
+}
 
-#let indent-rules(body) = [
-  #let fakepar = context {
-    let b = par[#box()]
-    let t = measure(b + b)
-
-    b
-    v(-t.height)
+#let indent-rules(body) = {
+  set par(first-line-indent: 2em)
+  show figure.where(kind: image): it => {
+    it.body
+    v(-0.5em)
+    it.caption
+    fakepar
   }
-  #set par(first-line-indent: 2em)
-  #show figure.where(kind: image): it => [
-    #it.body
-    #v(-0.5em)
-    #it.caption
-    #fakepar
-  ]
-  #show figure.where(kind: table): it => [
-    #it.caption
-    #v(-0.5em)
-    #it.body
-    #fakepar
-  ]
-  #show math.equation.where(block: true): it => [
-    #it
-    #fakepar
-  ]
-  #show raw.where(block: true): it => [
-    #text(font: 字体.等宽)[#it]
-    #fakepar
-  ]
-  #show list: it => [
-    #it
-    #fakepar
-  ]
-  #show enum: it => [
-    #it
-    #fakepar
-  ]
-  #show terms: it => [
-    #it
-    #fakepar
-  ]
-  #show heading: it => [
-    #it
-    #fakepar
-  ]
+  show figure.where(kind: table): it => {
+    it.caption
+    v(-0.5em)
+    it.body
+    fakepar
+  }
+  show raw.where(block: true): it => {
+    text(font: 字体.等宽)[#it]
+    fakepar
+  }
+  show math.equation.where(block: true): it => {
+    it
+    fakepar
+  }
+  show list: it => {
+    it
+    fakepar
+  }
+  show enum: it => {
+    it
+    fakepar
+  }
+  show terms: it => {
+    it
+    fakepar
+  }
+  show heading: it => {
+    it
+    fakepar
+  }
 
-  #body
-]
+  body
+}
 
-#let ref-rules(body) = [
-  #show cite: set text(fill: 颜色.深红)
-  #show ref: it => [
-    #set text(fill: 颜色.深红)
-    #show regex("[\d-]+"): it => text(weight: "bold")[#it]
-    #it
-  ]
-  #set math.equation(numbering: (..nums) => (text(fill: 颜色.深红)[(#counter(heading).get().at(0)-#nums.at(0))]))
-  #set figure(numbering: (..nums) => (text(fill: 颜色.深红)[#counter(heading).get().at(0)-#nums.at(0)]))
-  #show figure.caption: it => (
-    text(size: 字号.五号, weight: "bold")[
-      #text(fill: 颜色.深红)[#it.supplement]
-      #context it.counter.display(it.numbering)
-      #it.body
-    ]
-  )
-  #show link: set text(fill: 颜色.深红)
-  #show footnote: set text(fill: 颜色.深红)
-  #set footnote(numbering: (..nums) => (text(fill: 颜色.深红)[#nums.at(0)]))
-  #show heading.where(level: 1): it => [
+#let ref-rules(body) = {
+  show cite: it => highlight[#it]
+  show ref: it => highlight[#it]
+  show link: it => highlight[#it]
+  show footnote: it => highlight[#it]
+
+  set math.equation(numbering: (..nums) => (highlight[(#counter(heading).get().at(0)-#nums.at(0))]))
+  set figure(numbering: (..nums) => (highlight[#counter(heading).get().at(0)-#nums.at(0)]))
+  show figure.caption: it => {
+    set text(size: 字号.五号, weight: "bold")
+    highlight[#it.supplement]
+    context it.counter.display(it.numbering)
+    it.body
+  }
+  set footnote(numbering: (..nums) => (highlight[#nums.at(0)]))
+  show heading.where(level: 1): it => [
     #it
     #counter(figure.where(kind: image)).update(0)
     #counter(figure.where(kind: table)).update(0)
     #counter(math.equation).update(0)
   ]
 
-  #body
-]
+  body
+}
 
-#let heading-rules(body) = [
-  #show heading: it => custom-heading(
+#let heading-rules(body) = {
+  show heading: it => custom-heading(
     level: {
       if it.numbering == none {
         it.level - 1
@@ -135,52 +146,46 @@
     force-center: it.numbering == none,
   )[#it]
 
-  #body
-]
+  body
+}
 
-#let foreword-rules(body) = [
-  #set heading(numbering: none, outlined: false)
-  #body
-]
+#let foreword-rules(body) = {
+  set heading(numbering: none, outlined: false)
+  body
+}
 
-#let main-body-rules(body) = [
-  #set page(
-    footer: context [
-      #set text(fill: gray, font: 字体.宋体, size: 字号.小五)
-      #align(center)[
-        #counter(page).display("1")
-      ]
-    ],
-    header: [
-      #align(center)[
+#let main-body-rules(body) = {
+  set page(
+    footer: context {
+      set text(fill: gray, font: 字体.宋体, size: 字号.小五)
+      align(center)[#counter(page).display("1")]
+    },
+    header: {
+      align(center)[
         #text(fill: gray, font: 字体.宋体, size: 字号.小五)[
           山东大学本科毕业论文(设计)
         ]
         #v(-1em)
         #line(length: 100%, stroke: (paint: gray, thickness: 0.5pt))
       ]
-    ],
+    },
   )
-  #set heading(numbering: "1.1 ", outlined: true)
-  #counter(page).update(1)
-  #counter(footnote).update(0)
+  set heading(numbering: "1.1 ", outlined: true)
+  counter(page).update(1)
+  counter(footnote).update(0)
 
-  #body
-]
-#let appendix-rules(body) = [
+  body
+}
+#let appendix-rules(body) = {
   // 参考文献，致谢，附录等部分不需要编号
-  #set heading(numbering: none)
-  #show heading.where(level: 2): set heading(outlined: false)
-  #show heading.where(level: 3): set heading(outlined: false)
-  #set math.equation(numbering: none)
+  set heading(numbering: none)
+  show heading.where(level: 2): set heading(outlined: false)
+  show heading.where(level: 3): set heading(outlined: false)
+  set math.equation(numbering: none)
 
-  #set figure(numbering: (..nums) => (text(fill: 颜色.深红)[#nums.at(0)]))
-  #show figure.where(kind: image): set figure(supplement: "附图")
-  #show figure.where(kind: table): set figure(supplement: "附表")
+  set figure(numbering: (..nums) => (highlight[#nums.at(0)]))
+  show figure.where(kind: image): set figure(supplement: "附图")
+  show figure.where(kind: table): set figure(supplement: "附表")
 
-  #body
-]
-
-// 段首缩进: #ind 段落内容。
-// 短标题: 目#{ind}录
-#let ind = h(2em)
+  body
+}
