@@ -28,6 +28,7 @@
 
 #let 颜色 = (
   深红: rgb(192, 0, 0),
+  link-blue: rgb(51, 0, 245),
   tips: rgb("#00cbba"),
   attn: rgb("#f7e53c"),
 )
@@ -125,7 +126,7 @@
 #let ref-rules(body) = {
   show cite: it => dark-red-ref[#it]
   show ref: it => dark-red-ref[#it]
-  show link: it => dark-red-ref[#it]
+  show link: it => text(fill: 颜色.link-blue)[#underline[#it]]
   show footnote: it => dark-red-ref[#it]
 
   set math.equation(numbering: (..nums) => (dark-red-ref[(#counter(heading).get().at(0)-#nums.at(0))]))
