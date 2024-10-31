@@ -10,7 +10,7 @@
   heading-rules,
   foreword-rules,
   main-body-rules,
-  appendix-rules,
+  following-rules,
 )
 #import "bilingual-bibliography.typ": bilingual-bibliography
 

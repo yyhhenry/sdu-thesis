@@ -28,7 +28,8 @@
 
 #let 颜色 = (
   深红: rgb(192, 0, 0),
-  tips: rgb(0, 176, 80, 60%),
+  tips: rgb("#00cbba"),
+  attn: rgb("#f7e53c"),
 )
 
 // 段首缩进（通常已经自动添加）: #ind 段落内容。
@@ -55,15 +56,17 @@
   v(-t.height)
 }
 
-#let tips(body) = [
-  #rect(fill: 颜色.tips, stroke: none, radius: 0.5em)[
-    #fakepar
-    #body
-  ]
-]
-#let highlight(body) = {
+#let tips(body) = {
+  highlight(fill: 颜色.tips, top-edge: 1em, bottom-edge: -0.2em)[#body]
+}
+#let attn(body) = {
+  highlight(fill: 颜色.attn, top-edge: 1em, bottom-edge: -0.2em)[#underline()[#body]]
+}
+
+#let dark-red-ref(body) = {
   set text(fill: 颜色.深红)
   show regex("[\d-]+"): it => text(weight: "bold")[#it]
+
   body
 }
 
@@ -109,42 +112,48 @@
   body
 }
 
-#let ref-rules(body) = {
-  show cite: it => highlight[#it]
-  show ref: it => highlight[#it]
-  show link: it => highlight[#it]
-  show footnote: it => highlight[#it]
+#let re-index = {
+  counter(figure.where(kind: image)).update(0)
+  counter(figure.where(kind: table)).update(0)
+  counter(math.equation).update(0)
+}
 
-  set math.equation(numbering: (..nums) => (highlight[(#counter(heading).get().at(0)-#nums.at(0))]))
-  set figure(numbering: (..nums) => (highlight[#counter(heading).get().at(0)-#nums.at(0)]))
+#let ref-rules(body) = {
+  show cite: it => dark-red-ref[#it]
+  show ref: it => dark-red-ref[#it]
+  show link: it => dark-red-ref[#it]
+  show footnote: it => dark-red-ref[#it]
+
+  set math.equation(numbering: (..nums) => (dark-red-ref[(#counter(heading).get().at(0)-#nums.at(0))]))
+  set figure(numbering: (..nums) => (dark-red-ref[#counter(heading).get().at(0)-#nums.at(0)]))
   show figure.caption: it => {
     set text(size: 字号.五号, weight: "bold")
-    highlight[#it.supplement]
+    dark-red-ref[#it.supplement]
     context it.counter.display(it.numbering)
     it.body
   }
-  set footnote(numbering: (..nums) => (highlight[#nums.at(0)]))
-  show heading.where(level: 1): it => [
-    #it
-    #counter(figure.where(kind: image)).update(0)
-    #counter(figure.where(kind: table)).update(0)
-    #counter(math.equation).update(0)
-  ]
+  set footnote(numbering: (..nums) => (dark-red-ref[#nums.at(0)]))
+  show heading.where(level: 1): it => {
+    it
+    re-index
+  }
 
   body
 }
 
 #let heading-rules(body) = {
-  show heading: it => custom-heading(
-    level: {
-      if it.numbering == none {
-        it.level - 1
-      } else {
-        it.level
-      }
-    },
-    force-center: it.numbering == none,
-  )[#it]
+  show heading: it => {
+    let force-center = it.numbering == none or not it.outlined
+    let level = if force-center {
+      it.level - 1
+    } else {
+      it.level
+    }
+    custom-heading(
+      level: level,
+      force-center: force-center,
+    )[#it]
+  }
 
   body
 }
@@ -176,16 +185,38 @@
 
   body
 }
-#let appendix-rules(body) = {
+
+#let following-rules(body) = {
   // 参考文献，致谢，附录等部分不需要编号
   set heading(numbering: none)
   show heading.where(level: 2): set heading(outlined: false)
   show heading.where(level: 3): set heading(outlined: false)
-  set math.equation(numbering: none)
 
-  set figure(numbering: (..nums) => (highlight[#nums.at(0)]))
+  body
+}
+
+#let appendix-rules(body) = {
+  set heading(
+    numbering: (..nums) => {
+      if nums.pos().len() == 2 {
+        dark-red-ref[附录#nums.at(1)]
+      }
+    },
+    supplement: none,
+    outlined: true,
+  )
+  // 附录的二级标题仍然需要从头编号
+  show heading.where(level: 2): it => {
+    it
+    re-index
+  }
+
+  set figure(numbering: (..nums) => (dark-red-ref[#nums.at(0)]))
   show figure.where(kind: image): set figure(supplement: "附图")
   show figure.where(kind: table): set figure(supplement: "附表")
+
+  set figure(supplement: none)
+
 
   body
 }
