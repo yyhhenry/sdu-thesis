@@ -61,7 +61,7 @@
     align: (right + bottom, center + bottom),
     columns: (auto, 7cm),
     inset: 1em,
-    rows: 1.5cm,
+    rows: (2.5cm, 1.5cm, 1.5cm, 2.5cm, 1.5cm),
     field_name[论文题目], field_value[请输入论文题目请输入论文题目],
     field_name[姓#{ind}名], field_value[请输入姓名],
     field_name[学#{ind}号], field_value[请输入学号],
