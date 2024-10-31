@@ -5,6 +5,7 @@
   字体,
   颜色,
   ind,
+  tips,
   fakepar,
   indent-rules,
   ref-rules,
@@ -125,7 +126,11 @@
   你需要填写一些内容，以及引用文献 @vaswani2023attentionneed 。
 
 
-  == 参考文献 #v(0.5em)
+  #par(spacing: 1.5em, first-line-indent: 0pt)[
+    #text(size: 字号.四号, weight: "bold")[
+      参考文献
+    ]
+  ]
 
   #let std_bib = bibliography("../ref.bib", title: none, style: "gb-7714-2015-numeric")
   #bilingual-bibliography(bibliography: std_bib)
@@ -164,6 +169,63 @@
   重点和难点,
   inline-title[4. 论文提纲],
   论文提纲,
-  inline-title[4. 进度安排],
+  inline-title[5. 进度安排],
   进度安排,
+)
+
+#pagebreak()
+
+#align(center)[
+  #text(font: 字体.黑体, size: 字号.二号)[
+    毕 业 论 文（设计）开 题 报 告
+    #v(-0.5em)
+  ]
+]
+
+
+#let 指导教师意见 = inline-doc[
+
+  （对本课题的深度、广度及工作量的意见）
+
+  #tips[
+    示例：本课题旨在通过研究基于已有的医学影像诊断报告数据集，设计实现一种智能化诊断报告书写工具，实现报告书写过程中的智能化提示和纠错。论文选题较为前沿，反映人工智能技术应用发展趋势及本专业研究重点，具有一定的创新性，选题有一定的深度和广度，工作量适中，能够满足毕业设计要求，同意开题。
+  ]
+
+  #align(bottom)[
+    #align(center)[
+      #text(size: 字号.四号)[
+        指导教师：（签字）
+      ]
+    ]
+    #align(right)[
+      #h(2.5em)年#h(1.5em)月#h(1.5em)日
+    ]
+  ]
+]
+
+
+#let 教研室审查意见 = inline-doc[
+
+
+  #align(bottom)[
+    #align(center)[
+      #text(size: 字号.四号)[
+        教研室负责人：（签字）
+      ]
+    ]
+    #align(right)[
+      #h(2.5em)年#h(1.5em)月#h(1.5em)日
+    ]
+  ]
+]
+
+#table(
+  columns: (100%),
+  rows: (auto, 10cm, auto, 10cm),
+  inline-title[
+    指导教师意见：
+  ],
+  指导教师意见,
+  inline-title[教研室审查意见：],
+  教研室审查意见,
 )
