@@ -117,7 +117,7 @@
 ]
 #let inline-doc(body) = table.cell(inset: (y: 0.8em))[
   #fakepar
-
+  // #set par(spacing: 0.5em, leading: 0.5em) // 单倍行距（可选）
   #body
 ]
 
