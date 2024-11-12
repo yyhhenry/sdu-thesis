@@ -105,12 +105,12 @@
 
 #align(center)[
   #text(font: 字体.黑体, size: 字号.二号)[
-    毕 业 论 文（设计）开 题 报 告
-    #v(-0.5em)
+    毕#{h(0.5em)}业#{h(0.5em)}论#{h(0.5em)}文（设计）开#{h(0.5em)}题#{h(0.5em)}报#{h(0.5em)}告
+    #v(-0.6em)
   ]
 ]
 
-#let inline-title(body) = table.cell(inset: (y: 0.8em))[
+#let inline-title(body) = table.cell(inset: (y: 0.9em))[
   #text(size: 字号.四号, weight: "bold")[
     #body
   ]
@@ -177,8 +177,8 @@
 
 #align(center)[
   #text(font: 字体.黑体, size: 字号.二号)[
-    毕 业 论 文（设计）开 题 报 告
-    #v(-0.5em)
+    毕#{h(0.5em)}业#{h(0.5em)}论#{h(0.5em)}文（设计）开#{h(0.5em)}题#{h(0.5em)}报#{h(0.5em)}告
+    #v(-0.6em)
   ]
 ]
 
