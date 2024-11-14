@@ -103,21 +103,23 @@
 
 #pagebreak()
 
+#set page(paper: "a4", margin: (x: 2.75cm, y: 2.8cm))
+
 #align(center)[
   #text(font: 字体.黑体, size: 字号.二号)[
-    毕 业 论 文（设计）开 题 报 告
-    #v(-0.5em)
+    毕#{h(0.5em)}业#{h(0.5em)}论#{h(0.5em)}文（设计）开#{h(0.5em)}题#{h(0.5em)}报#{h(0.5em)}告
+    #v(-0.6em)
   ]
 ]
 
-#let inline-title(body) = table.cell(inset: (y: 0.8em))[
+#let inline-title(body) = table.cell(inset: (y: 0.9em))[
   #text(size: 字号.四号, weight: "bold")[
     #body
   ]
 ]
-#let inline-doc(body) = table.cell(inset: (y: 0.8em))[
+#let inline-doc(body) = table.cell(inset: (y: 0.9em))[
   #fakepar
-
+  // #set par(spacing: 0.5em, leading: 0.5em) // 单倍行距（可选）
   #body
 ]
 
@@ -148,7 +150,6 @@
 ]
 
 #let 论文提纲 = inline-doc[
-
 
   #set par(first-line-indent: 0pt)
 
@@ -220,8 +221,8 @@
 
 #align(center)[
   #text(font: 字体.黑体, size: 字号.二号)[
-    毕 业 论 文（设计）开 题 报 告
-    #v(-0.5em)
+    毕#{h(0.5em)}业#{h(0.5em)}论#{h(0.5em)}文（设计）开#{h(0.5em)}题#{h(0.5em)}报#{h(0.5em)}告
+    #v(-0.6em)
   ]
 ]
 
@@ -238,10 +239,17 @@
     #align(center)[
       #text(size: 字号.四号)[
         指导教师：（签字）
+        // 插入电子签名并调整位置
+        // #context {
+        //   let sign = box[#image("../media/img/prof-sign.png")]
+        //   let s = measure(sign)
+        //   sign
+        //   h(-s.width)
+        // }
       ]
     ]
     #align(right)[
-      #h(2.5em)年#h(1.5em)月#h(1.5em)日
+      2024年11月3日
     ]
   ]
 ]
