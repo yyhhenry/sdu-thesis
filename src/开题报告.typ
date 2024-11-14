@@ -105,19 +105,19 @@
 
 #align(center)[
   #text(font: 字体.黑体, size: 字号.二号)[
-    毕#{h(0.5em)}业#{h(0.5em)}论#{h(0.5em)}文（设计）开#{h(0.5em)}题#{h(0.5em)}报#{h(0.5em)}告
-    #v(-0.6em)
+    毕 业 论 文（设计）开 题 报 告
+    #v(-0.5em)
   ]
 ]
 
-#let inline-title(body) = table.cell(inset: (y: 0.9em))[
+#let inline-title(body) = table.cell(inset: (y: 0.8em))[
   #text(size: 字号.四号, weight: "bold")[
     #body
   ]
 ]
 #let inline-doc(body) = table.cell(inset: (y: 0.8em))[
   #fakepar
-  // #set par(spacing: 0.5em, leading: 0.5em) // 单倍行距（可选）
+
   #body
 ]
 
@@ -149,8 +149,51 @@
 
 #let 论文提纲 = inline-doc[
 
-  你需要填写一些内容。
 
+  #set par(first-line-indent: 0pt)
+
+  #let h1_c = counter("h1")
+  #let h2_c = counter("h2")
+
+  #let h1 = {
+    h1_c.step()
+    context h1_c.display("一、")
+    h(1em)
+    h2_c.update(0)
+  }
+  #let tab_h2 = {
+    h2_c.step()
+    h(3em)
+    context h2_c.display("（一）")
+  }
+
+  #h1 引言
+
+  #tab_h2 课题研究背景及意义
+
+  #tab_h2 国内外研究现状
+
+  #tab_h2 主要研究内容
+
+  #tab_h2 论文组织结构
+
+  #h1 内容一
+
+  #tab_h2 二级标题2.1
+
+  #tab_h2 二级标题2.2
+
+  #h1 内容二
+
+  #tab_h2 二级标题3.1
+
+  #tab_h2 二级标题3.2
+
+  #h1 总结与展望
+
+  #tab_h2 总结及结果价值分析
+
+  #tab_h2 未来方向展望
 ]
 
 #let 进度安排 = inline-doc[
@@ -177,8 +220,8 @@
 
 #align(center)[
   #text(font: 字体.黑体, size: 字号.二号)[
-    毕#{h(0.5em)}业#{h(0.5em)}论#{h(0.5em)}文（设计）开#{h(0.5em)}题#{h(0.5em)}报#{h(0.5em)}告
-    #v(-0.6em)
+    毕 业 论 文（设计）开 题 报 告
+    #v(-0.5em)
   ]
 ]
 
