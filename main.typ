@@ -26,7 +26,7 @@
   lang: "zh",
   region: "cn",
 )
-#set par(spacing: 1.5em, leading: 1em, justify: true)
+#set par(spacing: 1em, leading: 1em, justify: true)
 
 #show: indent-rules
 #show: ref-rules
