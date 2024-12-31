@@ -179,7 +179,7 @@
         #text(fill: gray, font: 字体.宋体, size: 字号.小五)[
           山东大学本科毕业论文(设计)
         ]
-        #v(-1em)
+        #v(-0.5em)
         #line(length: 100%, stroke: (paint: gray, thickness: 0.5pt))
       ]
     },
