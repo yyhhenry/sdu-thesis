@@ -10,6 +10,7 @@
   指导教师: "请输入指导教师",
   日期: "20XX年5月XX日",
   成绩评定表: false,
+  实践与综合设计: false,
 ) = [
   #set page(margin: (x: 3.18cm, y: 2.54cm))
   #set text(
@@ -22,13 +23,25 @@
 
   // 封面抬头
   #align(center)[
-    #image("../media/tmpl/cover-sdu.jpg")
+    #if 实践与综合设计 [
+      #image("../media/tmpl/cover-sdu-wh.png")
+    ] else [
+      #image("../media/tmpl/cover-sdu.jpg")
+    ]
   ]
 
   #align(center)[
-    #scale(x: 68%, reflow: true)[
-      #text(font: "FZDaHei-B02S", size: 62pt, spacing: 0.2em)[
-        毕 业 论 文#text(font: 字体.楷体)[（]设 计#text(font: 字体.楷体)[）]
+    #if 实践与综合设计 [
+      #par(spacing: 1em)[
+        #text(font: 字体.楷体, weight: "bold", size: 32pt)[
+          实践与综合设计
+        ]
+      ]
+    ] else [
+      #scale(x: 68%, reflow: true)[
+        #text(font: "FZDaHei-B02S", size: 62pt, spacing: 0.2em)[
+          毕 业 论 文#text(font: 字体.楷体)[（]设 计#text(font: 字体.楷体)[）]
+        ]
       ]
     ]
   ]
