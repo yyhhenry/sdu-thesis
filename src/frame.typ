@@ -186,13 +186,23 @@
       #ind 注：指导教师、答辩小组给予的成绩和论文(设计)总成绩统一实行百分制，总成绩中指导教师评分占40%(抽样答辩未被抽中的学生占100%)，答辩小组评分占60%。评语、成绩、签名及日期处必须手写。
     ]
 
-    #pagebreak()
+    #pagebreak(weak: true)
   ]
 ]
 
 #let thesis-outline() = [
   #set page(numbering: "I")
   #counter(page).update(1)
+
+  #set outline.entry(fill: repeat(gap: 0em)[#text(font: "Times New Roman")[.]])
+
+  #show outline.entry: it => {
+    if it.level == 1 {
+      text(weight: "bold")[#it]
+    } else {
+      it
+    }
+  }
 
   #outline(
     title: [
@@ -201,5 +211,5 @@
     indent: 2em,
   )
 
-  #pagebreak()
+  #pagebreak(weak: true)
 ]
