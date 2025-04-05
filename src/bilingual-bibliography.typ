@@ -2,7 +2,7 @@
 // See also https://github.com/nju-lug/modern-nju-thesis/issues/3
 // Original author: csimide, OrangeX4
 
-#import "style.typ": 颜色
+#import "style.typ": 颜色, 字号
 
 #let bilingual-bibliography(
   bibliography: none,
@@ -17,13 +17,16 @@
 
   // Please fill in the remaining mapping table here
   mapping = (
-    //"等": "et al",
-    "卷": "Vol.",
-    "册": "Bk.",
-    // "译": ", tran",
-    // "等译": "et al. tran",
-    // 注: 请见下方译者数量判断部分。
-  ) + mapping
+    (
+      //"等": "et al",
+      "卷": "Vol.",
+      "册": "Bk.",
+      // "译": ", tran",
+      // "等译": "et al. tran",
+      // 注: 请见下方译者数量判断部分。
+    )
+      + mapping
+  )
 
   let to-string(content) = {
     if content.has("text") {
@@ -100,13 +103,15 @@
           // 我想让上面这一行匹配变成非贪婪的，但加问号后没啥效果？
           let comma-in-itt = itt.text.replace(regex(",?\s?译"), "").matches(",")
           if (
-            type(comma-in-itt) == array and comma-in-itt.len() >= (
-              if allow-comma-in-name {
-                2
-              } else {
-                1
-              }
-            )
+            type(comma-in-itt) == array
+              and comma-in-itt.len()
+                >= (
+                  if allow-comma-in-name {
+                    2
+                  } else {
+                    1
+                  }
+                )
           ) {
             if extra-comma-before-et-al-trans {
               itt.text.replace(regex(",?\s?译"), ", tran")
@@ -148,6 +153,6 @@
     }
   }
 
-  set text(lang: "zh")
+  set text(lang: "zh", size: 字号.五号)
   bibliography
 }
