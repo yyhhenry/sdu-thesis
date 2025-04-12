@@ -72,6 +72,7 @@
   ]
 
   #let field_value(body) = text(font: 字体.宋体, size: 字号.四号)[
+    #h(0.5em)
     #body
   ]
 
@@ -84,8 +85,8 @@
           1pt
         },
       ),
-      align: (right + bottom, center + bottom),
-      columns: (auto, 5.5cm),
+      align: (right + bottom, left + bottom),
+      columns: (auto, 11.5em),
       rows: (1cm, 1cm, 1cm, 2cm, 1cm, 1cm),
       field_name[姓][名], field_value[#姓名],
       field_name[学][号], field_value[#学号],
