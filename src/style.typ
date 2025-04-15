@@ -65,7 +65,8 @@
 }
 
 #let dark-red-ref(body) = {
-  set text(fill: 颜色.深红)
+  // 注释此行以控制深红色高亮
+  // set text(fill: 颜色.深红)
   show regex("[\d-]+"): it => text(weight: "bold")[#it]
 
   body
@@ -201,15 +202,8 @@
 }
 
 #let appendix-rules(body) = {
-  set heading(
-    numbering: (..nums) => {
-      if nums.pos().len() == 2 {
-        dark-red-ref[附录#nums.at(1)]
-      }
-    },
-    supplement: none,
-    outlined: true,
-  )
+  set heading(supplement: none)
+  show heading.where(level: 2): set heading(numbering: (..nums) => dark-red-ref[附录#nums.at(1)])
   // 附录的二级标题仍然需要从头编号
   show heading.where(level: 2): it => {
     it
