@@ -2,7 +2,7 @@
 // See also https://github.com/nju-lug/modern-nju-thesis/issues/3
 // Original author: csimide, OrangeX4
 
-#import "style.typ": 颜色, 字号, dark-red-ref
+#import "style.typ": 颜色, 字号
 
 #let bilingual-bibliography(
   bibliography: none,
@@ -40,10 +40,6 @@
     } else if content == [ ] {
       " "
     }
-  }
-
-  show grid.cell.where(x: 0): it => {
-    dark-red-ref[#it]
   }
 
   show grid.cell.where(x: 1): it => {

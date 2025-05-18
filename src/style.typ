@@ -64,14 +64,6 @@
   highlight(fill: 颜色.attn, top-edge: 1em, bottom-edge: -0.2em)[#underline()[#body]]
 }
 
-#let dark-red-ref(body) = {
-  // 注释此行以控制深红色高亮
-  // set text(fill: 颜色.深红)
-  show regex("[\d-]+"): it => text(weight: "bold")[#it]
-
-  body
-}
-
 #let indent-rules(body) = {
   set par(first-line-indent: 2em)
   show figure.where(kind: image): it => {
@@ -125,20 +117,17 @@
 }
 
 #let ref-rules(body) = {
-  show cite: it => dark-red-ref[#it]
-  show ref: it => dark-red-ref[#it]
   show link: it => text(fill: 颜色.link-blue)[#underline[#it]]
-  show footnote: it => dark-red-ref[#it]
 
-  set math.equation(numbering: (..nums) => (dark-red-ref[(#counter(heading).get().at(0)-#nums.at(0))]))
-  set figure(numbering: (..nums) => (dark-red-ref[#counter(heading).get().at(0)-#nums.at(0)]))
+  set math.equation(numbering: (..nums) => [(#counter(heading).get().at(0)-#nums.at(0))])
+  set figure(numbering: (..nums) => [#counter(heading).get().at(0)-#nums.at(0)])
   show figure.caption: it => {
     set text(size: 字号.五号, weight: "bold")
-    dark-red-ref[#it.supplement]
+    it.supplement
     context it.counter.display(it.numbering)
     it.body
   }
-  set footnote(numbering: (..nums) => (dark-red-ref[#nums.at(0)]))
+  set footnote(numbering: (..nums) => [#nums.at(0)])
   show heading.where(level: 1): it => {
     it
     re-index
@@ -203,14 +192,14 @@
 
 #let appendix-rules(body) = {
   set heading(supplement: none)
-  show heading.where(level: 2): set heading(numbering: (..nums) => dark-red-ref[附录#nums.at(1)])
+  show heading.where(level: 2): set heading(numbering: (..nums) => [附录#nums.at(1)])
   // 附录的二级标题仍然需要从头编号
   show heading.where(level: 2): it => {
     it
     re-index
   }
 
-  set figure(numbering: (..nums) => (dark-red-ref[#nums.at(0)]))
+  set figure(numbering: (..nums) => [#nums.at(0)])
   show figure.where(kind: image): set figure(supplement: "附图")
   show figure.where(kind: table): set figure(supplement: "附表")
 
