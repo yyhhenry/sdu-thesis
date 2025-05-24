@@ -121,12 +121,12 @@
 
   set math.equation(numbering: (..nums) => [(#counter(heading).get().at(0)-#nums.at(0))])
   set figure(numbering: (..nums) => [#counter(heading).get().at(0)-#nums.at(0)])
-  show figure.caption: it => {
-    set text(size: 字号.五号, weight: "bold")
-    it.supplement
-    context it.counter.display(it.numbering)
-    it.body
-  }
+  show figure.caption: it => [
+    #set text(size: 字号.五号, weight: "bold")
+    #it.supplement
+    #context it.counter.display(it.numbering)
+    #it.body
+  ]
   set footnote(numbering: (..nums) => [#nums.at(0)])
   show heading.where(level: 1): it => {
     it
